@@ -1,0 +1,352 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 44
+Server version: 8.3.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases
+    -> ;
++--------------------+
+| Database           |
++--------------------+
+| a1                 |
+| arpan              |
+| base               |
+| c1                 |
+| college            |
+| d2                 |
+| daya               |
+| dayanand           |
+| dhanunjaya         |
+| fdslab123          |
+| information_schema |
+| mysql              |
+| performance_schema |
+| prajwal            |
+| r23ed112           |
+| r23ef073           |
+| r23ef298           |
+| r23eh046           |
+| r23eh149           |
+| reva               |
+| revac              |
+| revacollege        |
+| revauniversity     |
+| sharma             |
+| siva               |
+| sivaram            |
+| sys                |
+| w1                 |
++--------------------+
+28 rows in set (0.00 sec)
+
+mysql> create database r24ef812
+    -> ;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use r24ef812
+Database changed
+mysql> create table persons(pid int,
+    -> lastname varchar(255),
+    -> firstname varchar(255),
+    ->
+    -> address varchar(255),
+    -> city varchar(255));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> show tables;
++--------------------+
+| Tables_in_r24ef812 |
++--------------------+
+| persons            |
++--------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into persons(pid, lastname, firstname, address, city) values
+    -> (1, 'Sharma', 'Rajesh', '123 MG Road', 'Bangalore'),
+    -> (2, 'Verma', 'Anita', '456 Gandhi Nagar', 'Mumbai'),
+    -> (3, 'Reddy', 'Suresh', '789 Whitefield', 'Hyderabad'),
+    -> (4, 'Nair', 'Priya', '101 Indiranagar', 'Chennai'),
+    -> (5, 'Gupta', 'Amit', '222 MG Road', 'Delhi'),
+    -> (6, 'Kumar', 'Sunil', '333 JP Nagar', 'Pune'),
+    -> (7, 'Patil', 'Sneha', '444 Shivagi Nagar', 'Nagpur'),
+    -> (8, 'Das', 'Arjun', '555 Park Street', 'Kolkata'),
+    -> (9, 'Mehta', 'Neha', '666 Vasant Kunj', 'Ahmedabad'),
+    -> (10, 'Bose', 'Ravi', '777 Salt Lake', 'Kolkata');
+Query OK, 10 rows affected (0.00 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+mysql> select * from persons;
++------+----------+-----------+-------------------+-----------+
+| pid  | lastname | firstname | address           | city      |
++------+----------+-----------+-------------------+-----------+
+|    1 | Sharma   | Rajesh    | 123 MG Road       | Bangalore |
+|    2 | Verma    | Anita     | 456 Gandhi Nagar  | Mumbai    |
+|    3 | Reddy    | Suresh    | 789 Whitefield    | Hyderabad |
+|    4 | Nair     | Priya     | 101 Indiranagar   | Chennai   |
+|    5 | Gupta    | Amit      | 222 MG Road       | Delhi     |
+|    6 | Kumar    | Sunil     | 333 JP Nagar      | Pune      |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur    |
+|    8 | Das      | Arjun     | 555 Park Street   | Kolkata   |
+|    9 | Mehta    | Neha      | 666 Vasant Kunj   | Ahmedabad |
+|   10 | Bose     | Ravi      | 777 Salt Lake     | Kolkata   |
++------+----------+-----------+-------------------+-----------+
+10 rows in set (0.00 sec)
+
+mysql> update persons set address='696 Rajajinagar' where firstname='Anita';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> delete from persons where lastname='Reddy';
+Query OK, 1 row affected (0.00 sec)
+
+mysql> select lastname, firstname from persons;
++----------+-----------+
+| lastname | firstname |
++----------+-----------+
+| Sharma   | Rajesh    |
+| Verma    | Anita     |
+| Nair     | Priya     |
+| Gupta    | Amit      |
+| Kumar    | Sunil     |
+| Patil    | Sneha     |
+| Das      | Arjun     |
+| Mehta    | Neha      |
+| Bose     | Ravi      |
++----------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select distinct city from persons;
++-----------+
+| city      |
++-----------+
+| Bangalore |
+| Mumbai    |
+| Chennai   |
+| Delhi     |
+| Pune      |
+| Nagpur    |
+| Kolkata   |
+| Ahmedabad |
++-----------+
+8 rows in set (0.00 sec)
+
+mysql> select * from persons where city='Bangalore';
++------+----------+-----------+-------------+-----------+
+| pid  | lastname | firstname | address     | city      |
++------+----------+-----------+-------------+-----------+
+|    1 | Sharma   | Rajesh    | 123 MG Road | Bangalore |
++------+----------+-----------+-------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select * from persons where firstname = 'Suresh';
+Empty set (0.00 sec)
+
+mysql> select * from persons where firstname = 'Priya';
++------+----------+-----------+-----------------+---------+
+| pid  | lastname | firstname | address         | city    |
++------+----------+-----------+-----------------+---------+
+|    4 | Nair     | Priya     | 101 Indiranagar | Chennai |
++------+----------+-----------+-----------------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from persons where firstname='Priya' AND lastname = 'Nair';
++------+----------+-----------+-----------------+---------+
+| pid  | lastname | firstname | address         | city    |
++------+----------+-----------+-----------------+---------+
+|    4 | Nair     | Priya     | 101 Indiranagar | Chennai |
++------+----------+-----------+-----------------+---------+
+1 row in set (0.00 sec)
+
+mysql> select * from persons where firstname = 'Priya' OR firstname = 'Sneha';
++------+----------+-----------+-------------------+---------+
+| pid  | lastname | firstname | address           | city    |
++------+----------+-----------+-------------------+---------+
+|    4 | Nair     | Priya     | 101 Indiranagar   | Chennai |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur  |
++------+----------+-----------+-------------------+---------+
+2 rows in set (0.00 sec)
+
+mysql> select * from persons where lastname='Kumar' and (firstname='Sunil' or firstname='Sneha');
++------+----------+-----------+--------------+------+
+| pid  | lastname | firstname | address      | city |
++------+----------+-----------+--------------+------+
+|    6 | Kumar    | Sunil     | 333 JP Nagar | Pune |
++------+----------+-----------+--------------+------+
+1 row in set (0.00 sec)
+
+mysql> select * from persons ORDER BY lastname;
++------+----------+-----------+-------------------+-----------+
+| pid  | lastname | firstname | address           | city      |
++------+----------+-----------+-------------------+-----------+
+|   10 | Bose     | Ravi      | 777 Salt Lake     | Kolkata   |
+|    8 | Das      | Arjun     | 555 Park Street   | Kolkata   |
+|    5 | Gupta    | Amit      | 222 MG Road       | Delhi     |
+|    6 | Kumar    | Sunil     | 333 JP Nagar      | Pune      |
+|    9 | Mehta    | Neha      | 666 Vasant Kunj   | Ahmedabad |
+|    4 | Nair     | Priya     | 101 Indiranagar   | Chennai   |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur    |
+|    1 | Sharma   | Rajesh    | 123 MG Road       | Bangalore |
+|    2 | Verma    | Anita     | 696 Rajajinagar   | Mumbai    |
++------+----------+-----------+-------------------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select * from persons ORDER BY lastname DESC;
++------+----------+-----------+-------------------+-----------+
+| pid  | lastname | firstname | address           | city      |
++------+----------+-----------+-------------------+-----------+
+|    2 | Verma    | Anita     | 696 Rajajinagar   | Mumbai    |
+|    1 | Sharma   | Rajesh    | 123 MG Road       | Bangalore |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur    |
+|    4 | Nair     | Priya     | 101 Indiranagar   | Chennai   |
+|    9 | Mehta    | Neha      | 666 Vasant Kunj   | Ahmedabad |
+|    6 | Kumar    | Sunil     | 333 JP Nagar      | Pune      |
+|    5 | Gupta    | Amit      | 222 MG Road       | Delhi     |
+|    8 | Das      | Arjun     | 555 Park Street   | Kolkata   |
+|   10 | Bose     | Ravi      | 777 Salt Lake     | Kolkata   |
++------+----------+-----------+-------------------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select count(distinct city) from persons;
++----------------------+
+| count(distinct city) |
++----------------------+
+|                    8 |
++----------------------+
+1 row in set (0.00 sec)
+
+mysql> select (city) from persons;
++-----------+
+| city      |
++-----------+
+| Bangalore |
+| Mumbai    |
+| Chennai   |
+| Delhi     |
+| Pune      |
+| Nagpur    |
+| Kolkata   |
+| Ahmedabad |
+| Kolkata   |
++-----------+
+9 rows in set (0.00 sec)
+
+mysql> select count(city) from persons;
++-------------+
+| count(city) |
++-------------+
+|           9 |
++-------------+
+1 row in set (0.00 sec)
+
+mysql> select * from person limit 3;
+ERROR 1146 (42S02): Table 'r24ef812.person' doesn't exist
+mysql> select * from persons limit 3;
++------+----------+-----------+-----------------+-----------+
+| pid  | lastname | firstname | address         | city      |
++------+----------+-----------+-----------------+-----------+
+|    1 | Sharma   | Rajesh    | 123 MG Road     | Bangalore |
+|    2 | Verma    | Anita     | 696 Rajajinagar | Mumbai    |
+|    4 | Nair     | Priya     | 101 Indiranagar | Chennai   |
++------+----------+-----------+-----------------+-----------+
+3 rows in set (0.00 sec)
+
+mysql> select * from persons where city like 'B%';
++------+----------+-----------+-------------+-----------+
+| pid  | lastname | firstname | address     | city      |
++------+----------+-----------+-------------+-----------+
+|    1 | Sharma   | Rajesh    | 123 MG Road | Bangalore |
++------+----------+-----------+-------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Persons WHERE City LIKE '%ab%';
++------+----------+-----------+-----------------+-----------+
+| pid  | lastname | firstname | address         | city      |
++------+----------+-----------+-----------------+-----------+
+|    9 | Mehta    | Neha      | 666 Vasant Kunj | Ahmedabad |
++------+----------+-----------+-----------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Persons WHERE City LIKE    '%ab%';
++------+----------+-----------+-----------------+-----------+
+| pid  | lastname | firstname | address         | city      |
++------+----------+-----------+-----------------+-----------+
+|    9 | Mehta    | Neha      | 666 Vasant Kunj | Ahmedabad |
++------+----------+-----------+-----------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Persons WHERE City LIKE '%r';
++------+----------+-----------+-------------------+--------+
+| pid  | lastname | firstname | address           | city   |
++------+----------+-----------+-------------------+--------+
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur |
++------+----------+-----------+-------------------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT * FROM Persons WHERE City NOT LIKE '%ab%';
++------+----------+-----------+-------------------+-----------+
+| pid  | lastname | firstname | address           | city      |
++------+----------+-----------+-------------------+-----------+
+|    1 | Sharma   | Rajesh    | 123 MG Road       | Bangalore |
+|    2 | Verma    | Anita     | 696 Rajajinagar   | Mumbai    |
+|    4 | Nair     | Priya     | 101 Indiranagar   | Chennai   |
+|    5 | Gupta    | Amit      | 222 MG Road       | Delhi     |
+|    6 | Kumar    | Sunil     | 333 JP Nagar      | Pune      |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur    |
+|    8 | Das      | Arjun     | 555 Park Street   | Kolkata   |
+|   10 | Bose     | Ravi      | 777 Salt Lake     | Kolkata   |
++------+----------+-----------+-------------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT   *       FROM    Persons WHERE   LastName        LIKE    '_as';
++------+----------+-----------+-----------------+---------+
+| pid  | lastname | firstname | address         | city    |
++------+----------+-----------+-----------------+---------+
+|    8 | Das      | Arjun     | 555 Park Street | Kolkata |
++------+----------+-----------+-----------------+---------+
+1 row in set (0.00 sec)
+
+mysql> SELECT   * FROM Persons WHERE FirstName LIKE     'N_H_';
++------+----------+-----------+-----------------+-----------+
+| pid  | lastname | firstname | address         | city      |
++------+----------+-----------+-----------------+-----------+
+|    9 | Mehta    | Neha      | 666 Vasant Kunj | Ahmedabad |
++------+----------+-----------+-----------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT   *       FROM    Persons WHERE LastName IN       ('SHARMA’,'VERMA');
+    '>
+    '> ;
+    '>
+    '>
+    '>
+    '>
+    '> select * from persons;
+    '> ^Z^C
+mysql> SELECT * FROM Persons WHERE LastName IN('SHARMA’,'VERMA');
+    '> ^C
+mysql> SELECT * FROM Persons WHERE LastName IN('Sharma’,'Verma');
+    '> ^C
+mysql> select * from persons where lastname in ('Sharma', 'Verma');
++------+----------+-----------+-----------------+-----------+
+| pid  | lastname | firstname | address         | city      |
++------+----------+-----------+-----------------+-----------+
+|    1 | Sharma   | Rajesh    | 123 MG Road     | Bangalore |
+|    2 | Verma    | Anita     | 696 Rajajinagar | Mumbai    |
++------+----------+-----------+-----------------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> Alter table persons add column age(30);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(30)' at line 1
+mysql> Alter table persons add column age int(30);
+Query OK, 0 rows affected, 1 warning (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql>
