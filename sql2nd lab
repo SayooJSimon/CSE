@@ -349,4 +349,486 @@ mysql> Alter table persons add column age int(30);
 Query OK, 0 rows affected, 1 warning (0.03 sec)
 Records: 0  Duplicates: 0  Warnings: 1
 
-mysql>
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 54
+Server version: 8.3.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use r24ef812
+Database changed
+mysql> desc persons;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| pid       | int          | YES  |     | NULL    |       |
+| lastname  | varchar(255) | YES  |     | NULL    |       |
+| firstname | varchar(255) | YES  |     | NULL    |       |
+| address   | varchar(255) | YES  |     | NULL    |       |
+| city      | varchar(255) | YES  |     | NULL    |       |
+| age       | int          | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql> select * from persons;'
++------+----------+-----------+-------------------+-----------+------+
+| pid  | lastname | firstname | address           | city      | age  |
++------+----------+-----------+-------------------+-----------+------+
+|    1 | Sharma   | Rajesh    | 123 MG Road       | Bangalore | NULL |
+|    2 | Verma    | Anita     | 696 Rajajinagar   | Mumbai    | NULL |
+|    4 | Nair     | Priya     | 101 Indiranagar   | Chennai   | NULL |
+|    5 | Gupta    | Amit      | 222 MG Road       | Delhi     | NULL |
+|    6 | Kumar    | Sunil     | 333 JP Nagar      | Pune      | NULL |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur    | NULL |
+|    8 | Das      | Arjun     | 555 Park Street   | Kolkata   | NULL |
+|    9 | Mehta    | Neha      | 666 Vasant Kunj   | Ahmedabad | NULL |
+|   10 | Bose     | Ravi      | 777 Salt Lake     | Kolkata   | NULL |
++------+----------+-----------+-------------------+-----------+------+
+9 rows in set (0.00 sec)
+
+    '> ^C
+mysql> update persons set age = 21;
+Query OK, 9 rows affected (0.04 sec)
+Rows matched: 9  Changed: 9  Warnings: 0
+
+mysql> select * from persons;'
++------+----------+-----------+-------------------+-----------+------+
+| pid  | lastname | firstname | address           | city      | age  |
++------+----------+-----------+-------------------+-----------+------+
+|    1 | Sharma   | Rajesh    | 123 MG Road       | Bangalore |   21 |
+|    2 | Verma    | Anita     | 696 Rajajinagar   | Mumbai    |   21 |
+|    4 | Nair     | Priya     | 101 Indiranagar   | Chennai   |   21 |
+|    5 | Gupta    | Amit      | 222 MG Road       | Delhi     |   21 |
+|    6 | Kumar    | Sunil     | 333 JP Nagar      | Pune      |   21 |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur    |   21 |
+|    8 | Das      | Arjun     | 555 Park Street   | Kolkata   |   21 |
+|    9 | Mehta    | Neha      | 666 Vasant Kunj   | Ahmedabad |   21 |
+|   10 | Bose     | Ravi      | 777 Salt Lake     | Kolkata   |   21 |
++------+----------+-----------+-------------------+-----------+------+
+9 rows in set (0.00 sec)
+
+    '> ^C
+mysql> update persons set age = 18 where city = 'Bangalore';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from persons;
++------+----------+-----------+-------------------+-----------+------+
+| pid  | lastname | firstname | address           | city      | age  |
++------+----------+-----------+-------------------+-----------+------+
+|    1 | Sharma   | Rajesh    | 123 MG Road       | Bangalore |   18 |
+|    2 | Verma    | Anita     | 696 Rajajinagar   | Mumbai    |   21 |
+|    4 | Nair     | Priya     | 101 Indiranagar   | Chennai   |   21 |
+|    5 | Gupta    | Amit      | 222 MG Road       | Delhi     |   21 |
+|    6 | Kumar    | Sunil     | 333 JP Nagar      | Pune      |   21 |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur    |   21 |
+|    8 | Das      | Arjun     | 555 Park Street   | Kolkata   |   21 |
+|    9 | Mehta    | Neha      | 666 Vasant Kunj   | Ahmedabad |   21 |
+|   10 | Bose     | Ravi      | 777 Salt Lake     | Kolkata   |   21 |
++------+----------+-----------+-------------------+-----------+------+
+9 rows in set (0.00 sec)
+
+mysql> select firstname from persons where pid between 3 and 6;
++-----------+
+| firstname |
++-----------+
+| Priya     |
+| Amit      |
+| Sunil     |
++-----------+
+3 rows in set (0.00 sec)
+
+mysql> select firstname from persons where lastname between 'A' and 'M';
++-----------+
+| firstname |
++-----------+
+| Amit      |
+| Sunil     |
+| Arjun     |
+| Ravi      |
++-----------+
+4 rows in set (0.00 sec)
+
+mysql> select firstname from persons where lastname not between 'A' and 'M';
++-----------+
+| firstname |
++-----------+
+| Rajesh    |
+| Anita     |
+| Priya     |
+| Sneha     |
+| Neha      |
++-----------+
+5 rows in set (0.00 sec)
+
+mysql> select firstname from persons where lastname between 'Gupta' and 'Mehta';
++-----------+
+| firstname |
++-----------+
+| Amit      |
+| Sunil     |
+| Neha      |
++-----------+
+3 rows in set (0.00 sec)
+
+mysql> select firstname from persons where lastname not between 'Gupta' and 'Mehta';
++-----------+
+| firstname |
++-----------+
+| Rajesh    |
+| Anita     |
+| Priya     |
+| Sneha     |
+| Arjun     |
+| Ravi      |
++-----------+
+6 rows in set (0.00 sec)
+
+mysql> alter table persons add column salary float(7,2);
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 1
+
+mysql> desc persons;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| pid       | int          | YES  |     | NULL    |       |
+| lastname  | varchar(255) | YES  |     | NULL    |       |
+| firstname | varchar(255) | YES  |     | NULL    |       |
+| address   | varchar(255) | YES  |     | NULL    |       |
+| city      | varchar(255) | YES  |     | NULL    |       |
+| age       | int          | YES  |     | NULL    |       |
+| salary    | float(7,2)   | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> update persons set salary = case
+    -> pid
+    -> when 1 then 25000
+    -> when 2 then 25000
+    -> when 3 then 20000
+    -> when 4 then 15000
+    -> when 5 then 18000
+    -> when 6 then 30000
+    -> when 7 then 33000
+    -> when 8 then 45000
+    -> when 8 then 28000
+    -> when 8 then 45000
+    -> when 9 then 28000
+    -> when 10 then 48000
+    -> end
+    -> where pid in(1,2,3,4,5,6,7,8,9,10);
+Query OK, 9 rows affected (0.01 sec)
+Rows matched: 9  Changed: 9  Warnings: 0
+
+mysql> select * from persons;]
++------+----------+-----------+-------------------+-----------+------+----------+
+| pid  | lastname | firstname | address           | city      | age  | salary   |
++------+----------+-----------+-------------------+-----------+------+----------+
+|    1 | Sharma   | Rajesh    | 123 MG Road       | Bangalore |   18 | 25000.00 |
+|    2 | Verma    | Anita     | 696 Rajajinagar   | Mumbai    |   21 | 25000.00 |
+|    4 | Nair     | Priya     | 101 Indiranagar   | Chennai   |   21 | 15000.00 |
+|    5 | Gupta    | Amit      | 222 MG Road       | Delhi     |   21 | 18000.00 |
+|    6 | Kumar    | Sunil     | 333 JP Nagar      | Pune      |   21 | 30000.00 |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur    |   21 | 33000.00 |
+|    8 | Das      | Arjun     | 555 Park Street   | Kolkata   |   21 | 45000.00 |
+|    9 | Mehta    | Neha      | 666 Vasant Kunj   | Ahmedabad |   21 | 28000.00 |
+|   10 | Bose     | Ravi      | 777 Salt Lake     | Kolkata   |   21 | 48000.00 |
++------+----------+-----------+-------------------+-----------+------+----------+
+9 rows in set (0.00 sec)
+
+    -> ^C
+mysql> select * from persons where length(lastname)=5;
++------+----------+-----------+-------------------+-----------+------+----------+
+| pid  | lastname | firstname | address           | city      | age  | salary   |
++------+----------+-----------+-------------------+-----------+------+----------+
+|    2 | Verma    | Anita     | 696 Rajajinagar   | Mumbai    |   21 | 25000.00 |
+|    5 | Gupta    | Amit      | 222 MG Road       | Delhi     |   21 | 18000.00 |
+|    6 | Kumar    | Sunil     | 333 JP Nagar      | Pune      |   21 | 30000.00 |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur    |   21 | 33000.00 |
+|    9 | Mehta    | Neha      | 666 Vasant Kunj   | Ahmedabad |   21 | 28000.00 |
++------+----------+-----------+-------------------+-----------+------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select * from persons where age < 21;
++------+----------+-----------+-------------+-----------+------+----------+
+| pid  | lastname | firstname | address     | city      | age  | salary   |
++------+----------+-----------+-------------+-----------+------+----------+
+|    1 | Sharma   | Rajesh    | 123 MG Road | Bangalore |   18 | 25000.00 |
++------+----------+-----------+-------------+-----------+------+----------+
+1 row in set (0.00 sec)
+
+mysql> update persons set salary = 22000 where pid = 2;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from persons;
++------+----------+-----------+-------------------+-----------+------+----------+
+| pid  | lastname | firstname | address           | city      | age  | salary   |
++------+----------+-----------+-------------------+-----------+------+----------+
+|    1 | Sharma   | Rajesh    | 123 MG Road       | Bangalore |   18 | 25000.00 |
+|    2 | Verma    | Anita     | 696 Rajajinagar   | Mumbai    |   21 | 22000.00 |
+|    4 | Nair     | Priya     | 101 Indiranagar   | Chennai   |   21 | 15000.00 |
+|    5 | Gupta    | Amit      | 222 MG Road       | Delhi     |   21 | 18000.00 |
+|    6 | Kumar    | Sunil     | 333 JP Nagar      | Pune      |   21 | 30000.00 |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur    |   21 | 33000.00 |
+|    8 | Das      | Arjun     | 555 Park Street   | Kolkata   |   21 | 45000.00 |
+|    9 | Mehta    | Neha      | 666 Vasant Kunj   | Ahmedabad |   21 | 28000.00 |
+|   10 | Bose     | Ravi      | 777 Salt Lake     | Kolkata   |   21 | 48000.00 |
++------+----------+-----------+-------------------+-----------+------+----------+
+9 rows in set (0.00 sec)
+
+mysql> select count(*) from persons where lastname like 's%';
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select count(*) from persons where lastname like 'S%';
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+mysql> select * from persons where city <> 'Delhi';
++------+----------+-----------+-------------------+-----------+------+----------+
+| pid  | lastname | firstname | address           | city      | age  | salary   |
++------+----------+-----------+-------------------+-----------+------+----------+
+|    1 | Sharma   | Rajesh    | 123 MG Road       | Bangalore |   18 | 25000.00 |
+|    2 | Verma    | Anita     | 696 Rajajinagar   | Mumbai    |   21 | 22000.00 |
+|    4 | Nair     | Priya     | 101 Indiranagar   | Chennai   |   21 | 15000.00 |
+|    6 | Kumar    | Sunil     | 333 JP Nagar      | Pune      |   21 | 30000.00 |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur    |   21 | 33000.00 |
+|    8 | Das      | Arjun     | 555 Park Street   | Kolkata   |   21 | 45000.00 |
+|    9 | Mehta    | Neha      | 666 Vasant Kunj   | Ahmedabad |   21 | 28000.00 |
+|   10 | Bose     | Ravi      | 777 Salt Lake     | Kolkata   |   21 | 48000.00 |
++------+----------+-----------+-------------------+-----------+------+----------+
+8 rows in set (0.00 sec)
+
+mysql> select * from persons where length(lastname)=length(firstname);
++------+----------+-----------+-------------------+-----------+------+----------+
+| pid  | lastname | firstname | address           | city      | age  | salary   |
++------+----------+-----------+-------------------+-----------+------+----------+
+|    1 | Sharma   | Rajesh    | 123 MG Road       | Bangalore |   18 | 25000.00 |
+|    2 | Verma    | Anita     | 696 Rajajinagar   | Mumbai    |   21 | 22000.00 |
+|    6 | Kumar    | Sunil     | 333 JP Nagar      | Pune      |   21 | 30000.00 |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur    |   21 | 33000.00 |
+|   10 | Bose     | Ravi      | 777 Salt Lake     | Kolkata   |   21 | 48000.00 |
++------+----------+-----------+-------------------+-----------+------+----------+
+5 rows in set (0.00 sec)
+
+mysql> select max(age) - min(age) as AgeDifference from persons;
++---------------+
+| AgeDifference |
++---------------+
+|             3 |
++---------------+
+1 row in set (0.02 sec)
+
+mysql> insert into table persons(10,'Simon','Sayooj', '888 Hesarghatta', 'Bangalore', 21, 99000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table persons(10,'Simon','Sayooj', '888 Hesarghatta', 'Bangalore', 21, 99000)' at line 1
+mysql> insert into persons(10,'Simon','Sayooj', '888 Hesarghatta', 'Bangalore', 21, 99000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '10,'Simon','Sayooj', '888 Hesarghatta', 'Bangalore', 21, 99000)' at line 1
+mysql> insert into persons values(10,'Simon','Sayooj', '888 Hesarghatta', 'Bangalore', 21, 99000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from persons;']
++------+----------+-----------+-------------------+-----------+------+----------+
+| pid  | lastname | firstname | address           | city      | age  | salary   |
++------+----------+-----------+-------------------+-----------+------+----------+
+|    1 | Sharma   | Rajesh    | 123 MG Road       | Bangalore |   18 | 25000.00 |
+|    2 | Verma    | Anita     | 696 Rajajinagar   | Mumbai    |   21 | 22000.00 |
+|    4 | Nair     | Priya     | 101 Indiranagar   | Chennai   |   21 | 15000.00 |
+|    5 | Gupta    | Amit      | 222 MG Road       | Delhi     |   21 | 18000.00 |
+|    6 | Kumar    | Sunil     | 333 JP Nagar      | Pune      |   21 | 30000.00 |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur    |   21 | 33000.00 |
+|    8 | Das      | Arjun     | 555 Park Street   | Kolkata   |   21 | 45000.00 |
+|    9 | Mehta    | Neha      | 666 Vasant Kunj   | Ahmedabad |   21 | 28000.00 |
+|   10 | Bose     | Ravi      | 777 Salt Lake     | Kolkata   |   21 | 48000.00 |
+|   10 | Simon    | Sayooj    | 888 Hesarghatta   | Bangalore |   21 | 99000.00 |
++------+----------+-----------+-------------------+-----------+------+----------+
+10 rows in set (0.00 sec)
+
+    '> ^C
+mysql> alter table persons add primary key(pid);
+ERROR 1062 (23000): Duplicate entry '10' for key 'persons.PRIMARY'
+mysql> desc persons;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| pid       | int          | YES  |     | NULL    |       |
+| lastname  | varchar(255) | YES  |     | NULL    |       |
+| firstname | varchar(255) | YES  |     | NULL    |       |
+| address   | varchar(255) | YES  |     | NULL    |       |
+| city      | varchar(255) | YES  |     | NULL    |       |
+| age       | int          | YES  |     | NULL    |       |
+| salary    | float(7,2)   | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> delete from persons where lastname = 'Simon';
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc persons;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| pid       | int          | YES  |     | NULL    |       |
+| lastname  | varchar(255) | YES  |     | NULL    |       |
+| firstname | varchar(255) | YES  |     | NULL    |       |
+| address   | varchar(255) | YES  |     | NULL    |       |
+| city      | varchar(255) | YES  |     | NULL    |       |
+| age       | int          | YES  |     | NULL    |       |
+| salary    | float(7,2)   | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from persons;
++------+----------+-----------+-------------------+-----------+------+----------+
+| pid  | lastname | firstname | address           | city      | age  | salary   |
++------+----------+-----------+-------------------+-----------+------+----------+
+|    1 | Sharma   | Rajesh    | 123 MG Road       | Bangalore |   18 | 25000.00 |
+|    2 | Verma    | Anita     | 696 Rajajinagar   | Mumbai    |   21 | 22000.00 |
+|    4 | Nair     | Priya     | 101 Indiranagar   | Chennai   |   21 | 15000.00 |
+|    5 | Gupta    | Amit      | 222 MG Road       | Delhi     |   21 | 18000.00 |
+|    6 | Kumar    | Sunil     | 333 JP Nagar      | Pune      |   21 | 30000.00 |
+|    7 | Patil    | Sneha     | 444 Shivagi Nagar | Nagpur    |   21 | 33000.00 |
+|    8 | Das      | Arjun     | 555 Park Street   | Kolkata   |   21 | 45000.00 |
+|    9 | Mehta    | Neha      | 666 Vasant Kunj   | Ahmedabad |   21 | 28000.00 |
+|   10 | Bose     | Ravi      | 777 Salt Lake     | Kolkata   |   21 | 48000.00 |
++------+----------+-----------+-------------------+-----------+------+----------+
+9 rows in set (0.00 sec)
+
+mysql> alter table persons add primary key(pid);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc persons;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| pid       | int          | NO   | PRI | NULL    |       |
+| lastname  | varchar(255) | YES  |     | NULL    |       |
+| firstname | varchar(255) | YES  |     | NULL    |       |
+| address   | varchar(255) | YES  |     | NULL    |       |
+| city      | varchar(255) | YES  |     | NULL    |       |
+| age       | int          | YES  |     | NULL    |       |
+| salary    | float(7,2)   | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> create table Orders(OrderID int(10),
+    -> OrderNo int(10),
+    -> pid int(10),
+    -> primary key(OrderID),
+    -> foreign key(pid) references personss(pid));
+ERROR 1824 (HY000): Failed to open the referenced table 'personss'
+mysql> create table Orders(OrderID int(10),
+    -> pid int(10),
+    -> primary key(OrderID),
+    -> foreign key(pid) references persons(pid));
+Query OK, 0 rows affected, 2 warnings (0.02 sec)
+
+mysql> desc Orders;
++---------+------+------+-----+---------+-------+
+| Field   | Type | Null | Key | Default | Extra |
++---------+------+------+-----+---------+-------+
+| OrderID | int  | NO   | PRI | NULL    |       |
+| pid     | int  | YES  | MUL | NULL    |       |
++---------+------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> insert into orders values(1,100,1);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into orders values(2,101,1);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into orders values(3,102,3);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into orders values(4,103,4);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into orders values(5,104,5);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into orders values(6,105,4);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into orders values(7,106,4);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into orders values(8,107,3);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into orders values(9,108,2);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> insert into orders values(10,100,5);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+mysql> drop table orders;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table Orders(OrderID int(10),
+    ->     OrderNo int(10),
+    ->     pid int(10),
+    ->     primary key(OrderID),
+    ->     foreign key(pid) references persons(pid));
+Query OK, 0 rows affected, 3 warnings (0.02 sec)
+
+mysql> desc orders;
++---------+------+------+-----+---------+-------+
+| Field   | Type | Null | Key | Default | Extra |
++---------+------+------+-----+---------+-------+
+| OrderID | int  | NO   | PRI | NULL    |       |
+| OrderNo | int  | YES  |     | NULL    |       |
+| pid     | int  | YES  | MUL | NULL    |       |
++---------+------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into orders values(1,100,1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values(2,101,1);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values(3,102,3);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`r24ef812`.`orders`, CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `persons` (`pid`))
+mysql> insert into orders values(4,103,4);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values(5,104,5);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values(6,105,4);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values(7,106,4);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values(8,107,3);
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`r24ef812`.`orders`, CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `persons` (`pid`))
+mysql> insert into orders values(9,108,2);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into orders values(10,109,5);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from orders;
++---------+---------+------+
+| OrderID | OrderNo | pid  |
++---------+---------+------+
+|       1 |     100 |    1 |
+|       2 |     101 |    1 |
+|       4 |     103 |    4 |
+|       5 |     104 |    5 |
+|       6 |     105 |    4 |
+|       7 |     106 |    4 |
+|       9 |     108 |    2 |
+|      10 |     109 |    5 |
++---------+---------+------+
+8 rows in set (0.00 sec)
+
