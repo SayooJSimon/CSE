@@ -1,0 +1,344 @@
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 67
+Server version: 8.3.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use r24ef812;
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_r24ef812 |
++--------------------+
+| orders             |
+| persons            |
++--------------------+
+2 rows in set (0.00 sec)
+
+mysql> create table employee(
+    -> fname varchar(10) not null,
+    -> minit varchar(4),
+    -> lname varchar(10),
+    -> ssn integer(10) primary key,
+    -> bdate date,
+    -> address varchar(25),
+    -> sex char(1),
+    -> salary int(10),
+    -> dno int(1), foreign key(superssn) references employee(ssn));
+ERROR 1072 (42000): Key column 'superssn' doesn't exist in table
+mysql> CREATE   TABLE   employee
+    -> (
+    -> fname varchar(10) not null,
+    -> minit varchar(4),
+    -> lname varchar(10),
+    -> ssn integer(10) primary key,
+    -> bdate date,
+    -> address varchar(25),
+    -> sex char(1),
+    -> salary int(10),
+    -> superssn integer(10),
+    -> dno int(1), foreign key(superssn) references employee(ssn)
+    -> );
+Query OK, 0 rows affected, 4 warnings (0.02 sec)
+
+mysql> create table department(
+    -> dname varchar(20),
+    -> dnumber int(1) primary key,
+    -> mgrssn integer(10),
+    -> mgrstartdate date,
+    -> foreign key(mgrssn) references employee(ssn));
+Query OK, 0 rows affected, 2 warnings (0.03 sec)
+
+mysql> create table dept_locations(
+    -> dnumber int(1),
+    -> dlocation varchar(10),
+    -> foreign key(dnumber) references department(dnumber),
+    -> primary key(dnumber, dlocation));
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> alter table employee add foreign key(dno) references department(dnumber),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> alter table employee add foreign key(dno) references department(dnumber);
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> create table project(
+    -> pname varchar(20) not null,
+    -> pnumber int(4) primary key,
+    -> plocation varchar(10),
+    -> dnum int(1),
+    -> foreign key(dnum) references department(dnumber));
+Query OK, 0 rows affected, 2 warnings (0.04 sec)
+
+mysql> create table works_on(
+    -> essn int(10),
+    -> pno int(4), hours float,
+    -> foreign key(essn) references employee(ssn),
+    -> foreign key(pno) reference project(pnumber),
+    -> primary key(essn, pno));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'reference project(pnumber),
+primary key(essn, pno))' at line 5
+mysql> create table works_on(
+    -> essn int(10),
+    -> pno int(4), hours float,
+    -> foreign key(essn) references employee(ssn),
+    -> foreign key(pno) references project(pnumber),
+    -> primary key(essn, pno));
+Query OK, 0 rows affected, 2 warnings (0.04 sec)
+
+mysql> create table dependent(
+    -> essn integer(10),
+    -> dependent_name varchar(15),
+    -> sex char(1), bdate date,
+    -> relationship varchar(20),
+    -> foreign key(essn) references emoployee(ssn),
+    -> primary key(essn, department_name));
+ERROR 1072 (42000): Key column 'department_name' doesn't exist in table
+mysql> create table dependent
+    -> (essn integer (10),
+    -> dependent_name varchar (15),
+    -> sex char (1), bdate date,
+    -> relationship varchar (20),
+    -> foreign key(essn) references employee(ssn),
+    -> primary key (essn, dependent_name)
+    -> );
+Query OK, 0 rows affected, 1 warning (0.01 sec)
+
+mysql> insert into employee(Fname, Minit, Lname, Ssn, Bdate, Address, sex, Salary) values
+    -> ('John','B','Smith', 123456789,'1965-01-09','731-Fondren-Houston-TX','M', 30000),
+    -> ('Franklin', 'T', 'Wong', 333445555, '1955-12-08', '638-Voss-Houston-TX','M', 40000),
+    -> ('Alicia', 'J', 'Zelaya', 999887777, '1968-01-19', '3321-Castle-Spring-TX', 'F', 25000),
+    -> ('Jennifer', 'S', 'Wallace', 987654321, '1941-06-20', '291-Berry-Bellaire-TX', 'F', 43000),
+    -> ('Ramesh', 'K', 'Narayan', 666884444, '1962-09-15', '975-Fire-Oak-Humble-TX', 'M', 38000),
+    -> ('Joyce','A', 'English', 453453453, '1972-07-31', '5631-Rice-Houston-TX','F', 25000),
+    -> ('Ahmad','V', 'Jabbar', 987987987, '1969-03-29', '980-Dallas-Houston-TX', 'M', 25000),
+    -> ('James', 'E', 'Borg', 888665555, '1937-11-10', '450-Stone-Houston-TX', 'M', 55000);
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> insert into department values
+    -> ('Research', 5, 333445555, '1988-05-22'),
+    -> ('Administration', 4, 987654321, '1995-01-01'),
+    -> ('Headquarters', 1, 888665555, '1981-06-19');
+Query OK, 3 rows affected (0.00 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> insert into dept_locations  values
+    -> (1,'Houston'),
+    -> (4, 'Stafford'),
+    -> (5, 'Bellaire'),
+    -> (5, 'Sugarland'),
+    -> (5,'Houston');
+Query OK, 5 rows affected (0.00 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> insert into project values
+    -> ('ProductX', 1, 'Bellaire', 5),
+    -> ('ProductY', 2, 'Sugarland', 5),
+    -> ('ProductZ', 3, 'Houston', 5),
+    -> ('Computerization', 10, 'Stafford', 4),
+    -> ('Reorganization', 20, 'Houston', 1),
+    -> ('Newbenefits', 30, 'Stafford', 4);
+Query OK, 6 rows affected (0.00 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+mysql> insert into works_on values
+    -> (123456789, 1, 32.5),
+    -> (123456789, 2, 7.5),
+    -> (666884444, 3, 40.0),
+    -> (453453453, 1, 20.0),
+    -> (453453453, 2, 20.0),
+    -> (333445555, 2, 10.0),
+    -> (333445555, 3, 10.0),
+    -> (333445555, 10, 10.0),
+    -> (333445555, 20, 10.0),
+    -> (999887777, 30, 30.0),
+    -> (999887777, 10, 10.0),
+    -> (987987987, 10, 35.0),
+    -> (987987987, 30, 5.0),
+    -> (987654321, 30, 20.0),
+    -> (987654321, 20, 15.0),
+    -> (888665555, 20, NULL);
+Query OK, 16 rows affected (0.00 sec)
+Records: 16  Duplicates: 0  Warnings: 0
+
+mysql> insert into dependent values
+    -> (333445555,'Alice','F','1986-04-05','Daughter'),
+    -> (333445555,'Theodore','M','1983-10-25','Son'),
+    -> (333445555,'Joy','F','1958-05-03','Spouse'),
+    -> (987654321,'Abner','M','1942-02-28','Spouse'),
+    -> (123456789,'Michael','M','1988-01-04','Son'),
+    -> (123456789,'Alice','F','1988-12-30','Daughter'),
+    -> (123456789,'Elizabeth','F','1967-05-05','Spouse');
+Query OK, 7 rows affected (0.00 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql>  update employee set superssn=333445555,dno=5  where ssn=123456789;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>      update employee set superssn=888665555,dno=5  where ssn=333445555;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set superssn=987654321,dno=4  where ssn=999887777;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set superssn=888665555,dno=4  where ssn=987654321;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set superssn=333445555,dno=5  where ssn=666884444;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set superssn=333445555,dno=5  where ssn=453453453;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set superssn=987654321,dno=4  where ssn=987987987;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee set dno=1  where ssn=888665555;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> insert into department values
+    -> ('Research', 5, 333445555, '1988-05-22'),
+    -> ('Administration', 4, 987654321, '1995-01-01'),
+    -> ('Headquarters', 1, 888665555, '1981-06-19');
+ERROR 1062 (23000): Duplicate entry '5' for key 'department.PRIMARY'
+mysql> insert into dept_locations  values
+    -> (1,'Houston'),
+    -> (4, 'Stafford'),
+    -> (5, 'Bellaire'),
+    -> (5, 'Sugarland'),
+    -> (5,'Houston');
+ERROR 1062 (23000): Duplicate entry '1-Houston' for key 'dept_locations.PRIMARY'
+mysql> insert into project values
+    -> ('ProductX', 1, 'Bellaire', 5),
+    -> ('ProductY', 2, 'Sugarland', 5),
+    -> ('ProductZ', 3, 'Houston', 5),
+    -> ('Computerization', 10, 'Stafford', 4),
+    -> ('Reorganization', 20, 'Houston', 1),
+    -> ('Newbenefits', 30, 'Stafford', 4);
+ERROR 1062 (23000): Duplicate entry '1' for key 'project.PRIMARY'
+mysql> insert into works_on values
+    -> (123456789, 1, 32.5),
+    -> (123456789, 2, 7.5),
+    -> (666884444, 3, 40.0),
+    -> (453453453, 1, 20.0),
+    -> (453453453, 2, 20.0),
+    -> (333445555, 2, 10.0),
+    -> (333445555, 3, 10.0),
+    -> (333445555, 10, 10.0),
+    -> (333445555, 20, 10.0),
+    -> (999887777, 30, 30.0),
+    -> (999887777, 10, 10.0),
+    -> (987987987, 10, 35.0),
+    -> (987987987, 30, 5.0),
+    -> (987654321, 30, 20.0),
+    -> (987654321, 20, 15.0),
+    -> (888665555, 20, NULL);
+ERROR 1062 (23000): Duplicate entry '123456789-1' for key 'works_on.PRIMARY'
+mysql> insert into dependent values
+    -> (333445555,'Alice','F','1986-04-05','Daughter'),
+    -> (333445555,'Theodore','M','1983-10-25','Son'),
+    -> (333445555,'Joy','F','1958-05-03','Spouse'),
+    -> (987654321,'Abner','M','1942-02-28','Spouse'),
+    -> (123456789,'Michael','M','1988-01-04','Son'),
+    -> (123456789,'Alice','F','1988-12-30','Daughter'),
+    -> (123456789,'Elizabeth','F','1967-05-05','Spouse');
+ERROR 1062 (23000): Duplicate entry '333445555-Alice' for key 'dependent.PRIMARY'
+mysql> update employee set superssn=333445555,dno=5  where ssn=123456789;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql>      update employee set superssn=888665555,dno=5  where ssn=333445555;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> update employee set superssn=987654321,dno=4  where ssn=999887777;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> update employee set superssn=888665555,dno=4  where ssn=987654321;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> update employee set superssn=333445555,dno=5  where ssn=666884444;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> update employee set superssn=333445555,dno=5  where ssn=453453453;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> update employee set superssn=987654321,dno=4  where ssn=987987987;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> update employee set dno=1  where ssn=888665555;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+mysql> ALTER TABLE EMPLOYEE ADD JOB VARCHAR (12);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DELETE FROM EMPLOYEE WHERE LNAME='Brown';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> DELETE FROM EMPLOYEE WHERE LNAME='Borg';
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`r24ef812`.`department`, CONSTRAINT `department_ibfk_1` FOREIGN KEY (`mgrssn`) REFERENCES `employee` (`ssn`))
+mysql> DELETE FROM EMPLOYEE WHERE SSN='123456789';
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`r24ef812`.`dependent`, CONSTRAINT `dependent_ibfk_1` FOREIGN KEY (`essn`) REFERENCES `employee` (`ssn`))
+mysql> DELETE FROM EMPLOYEE WHERE DNO IN (SELECT DNUMBER FROM DEPARTMENT WHERE DNAME='Research');
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`r24ef812`.`dependent`, CONSTRAINT `dependent_ibfk_1` FOREIGN KEY (`essn`) REFERENCES `employee` (`ssn`))
+mysql> DELETE FROM EMPLOYEE WHERE SSN='123456789';
+ERROR 1451 (23000): Cannot delete or update a parent row: a foreign key constraint fails (`r24ef812`.`dependent`, CONSTRAINT `dependent_ibfk_1` FOREIGN KEY (`essn`) REFERENCES `employee` (`ssn`))
+mysql> UPDATE PROJECT SET PLOCATION = 'Bellaire', DNUM = 5 WHERE PNUMBER=10;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+mysql> select * from project;
++-----------------+---------+-----------+------+
+| pname           | pnumber | plocation | dnum |
++-----------------+---------+-----------+------+
+| ProductX        |       1 | Bellaire  |    5 |
+| ProductY        |       2 | Sugarland |    5 |
+| ProductZ        |       3 | Houston   |    5 |
+| Computerization |      10 | Bellaire  |    5 |
+| Reorganization  |      20 | Houston   |    1 |
+| Newbenefits     |      30 | Stafford  |    4 |
++-----------------+---------+-----------+------+
+6 rows in set (0.00 sec)
+
+mysql> UPDATE EMPLOYEE  SET SALARY = SALARY *1.1 WHERE DNO IN (SELECT
+    -> DNUMBER FROM DEPARTMENT WHERE DNAME='Research');
+Query OK, 4 rows affected (0.02 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> select * from employee;
++----------+-------+---------+-----------+------------+------------------------+------+--------+-----------+------+------+
+| fname    | minit | lname   | ssn       | bdate      | address                | sex  | salary | superssn  | dno  | JOB  |
++----------+-------+---------+-----------+------------+------------------------+------+--------+-----------+------+------+
+| John     | B     | Smith   | 123456789 | 1965-01-09 | 731-Fondren-Houston-TX | M    |  33000 | 333445555 |    5 | NULL |
+| Franklin | T     | Wong    | 333445555 | 1955-12-08 | 638-Voss-Houston-TX    | M    |  44000 | 888665555 |    5 | NULL |
+| Joyce    | A     | English | 453453453 | 1972-07-31 | 5631-Rice-Houston-TX   | F    |  27500 | 333445555 |    5 | NULL |
+| Ramesh   | K     | Narayan | 666884444 | 1962-09-15 | 975-Fire-Oak-Humble-TX | M    |  41800 | 333445555 |    5 | NULL |
+| James    | E     | Borg    | 888665555 | 1937-11-10 | 450-Stone-Houston-TX   | M    |  55000 |      NULL |    1 | NULL |
+| Jennifer | S     | Wallace | 987654321 | 1941-06-20 | 291-Berry-Bellaire-TX  | F    |  43000 | 888665555 |    4 | NULL |
+| Ahmad    | V     | Jabbar  | 987987987 | 1969-03-29 | 980-Dallas-Houston-TX  | M    |  25000 | 987654321 |    4 | NULL |
+| Alicia   | J     | Zelaya  | 999887777 | 1968-01-19 | 3321-Castle-Spring-TX  | F    |  25000 | 987654321 |    4 | NULL |
++----------+-------+---------+-----------+------------+------------------------+------+--------+-----------+------+------+
+8 rows in set (0.00 sec)
