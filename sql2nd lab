@@ -1680,3 +1680,384 @@ mysql> show index from employee;
 5 rows in set (0.01 sec)
 
 mysql>
+Enter password: *******
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 10
+Server version: 8.3.0 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2024, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use r24ef812
+Database changed
+mysql> show tables;
++--------------------+
+| Tables_in_r24ef812 |
++--------------------+
+| department         |
+| dependent          |
+| dept_info          |
+| dept_locations     |
+| employee           |
+| orders             |
+| persons            |
+| project            |
+| works_on           |
+| works_on1          |
++--------------------+
+10 rows in set (0.01 sec)
+
+mysql> show databases'
+    '> ;
+    '> ^C
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| arpan              |
+| base               |
+| c1                 |
+| college            |
+| college2           |
+| company            |
+| cse                |
+| csea               |
+| cseb               |
+| csed               |
+| csef               |
+| d2                 |
+| daya               |
+| dayanand           |
+| db25               |
+| dbms2025           |
+| dbms25             |
+| dept_location      |
+| dhanunjaya         |
+| employe            |
+| employee           |
+| fdslab123          |
+| flight             |
+| information_schema |
+| iota               |
+| mysql              |
+| performance_schema |
+| prajwal            |
+| r23ed112           |
+| r23ef028           |
+| r23ef073           |
+| r23ef149           |
+| r23ef298           |
+| r23ef329           |
+| r23eh041           |
+| r23eh046           |
+| r23eh149           |
+| r24ef812           |
+| r24ef814           |
+| r24eh805           |
+| reva               |
+| revac              |
+| revacollege        |
+| revauniversity     |
+| sharma             |
+| siva               |
+| sivaram            |
+| sys                |
+| test_me            |
+| w1                 |
++--------------------+
+50 rows in set (0.00 sec)
+
+mysql> CREATE TABLE flight (no INT (11), frm VARCHAR(20),  too VARCHAR(20),
+    ->               distance INT(11), departs VARCHAR (20), arrives VARCHAR(20),  price double,
+    ->                PRIMARY KEY (no) );
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql> CREATE TABLE aircraft(aid INT, aname VARCHAR(20), cruisingrange INT,
+    ->                PRIMARY KEY (aid) );
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql>  CREATE TABLE employees( eid INT(20), ename VARCHAR(20), salary INT (20), PRIMARY  KEY (eid) );
+Query OK, 0 rows affected, 2 warnings (0.01 sec)
+
+mysql>  CREATE TABLE certified(eid INT(20), aid INT(10), PRIMARY KEY (eid,aid), FOREIGN KEY (eid) REFERENCES employees (eid),FOREIGN KEY (aid) REFERENCES
+    ->               aircraft (aid) );
+Query OK, 0 rows affected, 2 warnings (0.04 sec)
+
+mysql> INSERT INTO FLIGHT VALUES (1, “BANGALORE”, “MANGALOINSERT VALRE”,360, “10:45:00”, “12:00:00”,10000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?BANGALORE?, ?MANGALOINSERT VALRE?,360, ?10:45:00?, ?12:00:00?,10000)' at line 1
+mysql> INSERT INTO FLIGHT VALUES (2, “BANGALORE”, “DELHI”,5000, “12:15:00”, “04:30:00”,25000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?BANGALORE?, ?DELHI?,5000, ?12:15:00?, ?04:30:00?,25000)' at line 1
+mysql> INSERT INTO FLIGHT VALUES (3, “BANGALORE”, “MUMBAI”,3500, “02:15:00”, “05:25:00”,30000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?BANGALORE?, ?MUMBAI?,3500, ?02:15:00?, ?05:25:00?,30000)' at line 1
+mysql> INSERT INTO FLIGHT VALUES (4, “DELHI”, “MUMBAI”,4500, “10:15:00”, “12:05:00”,35000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?DELHI?, ?MUMBAI?,4500, ?10:15:00?, ?12:05:00?,35000)' at line 1
+mysql> INSERT INTO FLIGHT VALUES (5, “DELHI”, “FRANKFURT”,18000, “07:15:00”, “05:30:00”,90000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?DELHI?, ?FRANKFURT?,18000, ?07:15:00?, ?05:30:00?,90000)' at line 1
+mysql> INSERT INTO FLIGHT VALUES (6, “BANGALORE”, “FRANFURT”,19500, “10:00:00”, “07:45:00”,95000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?BANGALORE?, ?FRANFURT?,19500, ?10:00:00?, ?07:45:00?,95000)' at line 1
+mysql> INSERT INTO FLIGHT VALUES (7, “BANGALORE”, “FRANKURT”,17000, “12:00:00”, “06:30:00”,99000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '?BANGALORE?, ?FRANKURT?,17000, ?12:00:00?, ?06:30:00?,99000)' at line 1
+mysql> INSERT INTO FLIGHT VALUES (1, 'BANGALORE”, 'MANGALOINSERT VALRE”,360, '10:45:00”, '12:00:00”,10000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'MANGALOINSERT VALRE?,360, '10:45:00?, '12:00:00?,10000)' at line 1
+mysql> INSERT INTO FLIGHT VALUES (2, 'BANGALORE”, 'DELHI”,5000, '12:15:00”, '04:30:00”,25000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'DELHI?,5000, '12:15:00?, '04:30:00?,25000)' at line 1
+mysql> INSERT INTO FLIGHT VALUES (3, 'BANGALORE”, 'MUMBAI”,3500, '02:15:00”, '05:25:00”,30000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'MUMBAI?,3500, '02:15:00?, '05:25:00?,30000)' at line 1
+mysql> INSERT INTO FLIGHT VALUES (4, 'DELHI”, 'MUMBAI”,4500, '10:15:00”, '12:05:00”,35000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'MUMBAI?,4500, '10:15:00?, '12:05:00?,35000)' at line 1
+mysql> INSERT INTO FLIGHT VALUES (5, 'DELHI”, 'FRANKFURT”,18000, '07:15:00”, '05:30:00”,90000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FRANKFURT?,18000, '07:15:00?, '05:30:00?,90000)' at line 1
+mysql> INSERT INTO FLIGHT VALUES (6, 'BANGALORE”, 'FRANFURT”,19500, '10:00:00”, '07:45:00”,95000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FRANFURT?,19500, '10:00:00?, '07:45:00?,95000)' at line 1
+mysql> INSERT INTO FLIGHT VALUES (7, 'BANGALORE”, 'FRANKURT”,17000, '12:00:00”, '06:30:00”,99000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FRANKURT?,17000, '12:00:00?, '06:30:00?,99000)' at line 1
+mysql> INSERT INTO FLIGHT VALUES (1, 'BANGALORE', 'MANGALOINSERT VALRE',360, '10:45:00', '12:00:00',10000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO FLIGHT VALUES (2, 'BANGALORE', 'DELHI',5000, '12:15:00', '04:30:00',25000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO FLIGHT VALUES (3, 'BANGALORE', 'MUMBAI',3500, '02:15:00', '05:25:00',30000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO FLIGHT VALUES (4, 'DELHI', 'MUMBAI',4500, '10:15:00', '12:05:00',35000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO FLIGHT VALUES (5, 'DELHI', 'FRANKFURT',18000, '07:15:00', '05:30:00',90000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO FLIGHT VALUES (6, 'BANGALORE', 'FRANFURT',19500, '10:00:00', '07:45:00',95000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO FLIGHT VALUES (7, 'BANGALORE', 'FRANKURT',17000, '12:00:00', '06:30:00',99000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO AIRCRAFT VALUES (123, 'AIRBUS',1000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> INSERT INTO AIRCRAFT VALUES (302, 'BOEING',5000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO AIRCRAFT VALUES (306, 'JET01',5000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO AIRCRAFT VALUES (378, 'AIRBUS380',8000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO AIRCRAFT VALUES (456, 'AIRCRAFT',500);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO AIRCRAFT VALUES (789, 'AIRCRAFT02',800);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO AIRCRAFT VALUES (951, 'AIRCRAFT03',1000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  INSERT INTO employees VALUES (1, 'Ajay',30000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  INSERT INTO employees VALUES (2, 'Ajith',85000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  INSERT INTO employees VALUES (3, 'Arnab',50000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  INSERT INTO employees VALUES(4, 'Harry',45000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  INSERT INTO employees VALUES(5, 'Ron',90000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  INSERT INTO employees VALUES (6, 'Josh',75000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  INSERT INTO employees VALUES (7, 'Ram',100000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES (1,123);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES  (2,123);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES  (1,302);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES   (5,302);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES   (7,302);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES (1,306);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES (2,306);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES (1,378);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES   (2,378);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES   (4,378);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES   (6,456);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES  (3,456);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES  (5,789);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES (6,789);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES (3,951);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES  (1,951);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> INSERT INTO certified VALUES  (1,789);
+Query OK, 1 row affected (0.00 sec)
+
+mysql> desc flight, aircraft, employee, certified;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ', aircraft, employee, certified' at line 1
+mysql> desc flight;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| no       | int         | NO   | PRI | NULL    |       |
+| frm      | varchar(20) | YES  |     | NULL    |       |
+| too      | varchar(20) | YES  |     | NULL    |       |
+| distance | int         | YES  |     | NULL    |       |
+| departs  | varchar(20) | YES  |     | NULL    |       |
+| arrives  | varchar(20) | YES  |     | NULL    |       |
+| price    | double      | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+7 rows in set (0.01 sec)
+
+mysql> desc aircraft;
++---------------+-------------+------+-----+---------+-------+
+| Field         | Type        | Null | Key | Default | Extra |
++---------------+-------------+------+-----+---------+-------+
+| aid           | int         | NO   | PRI | NULL    |       |
+| aname         | varchar(20) | YES  |     | NULL    |       |
+| cruisingrange | int         | YES  |     | NULL    |       |
++---------------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> desc employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| fname    | varchar(10) | NO   | MUL | NULL    |       |
+| minit    | varchar(4)  | YES  |     | NULL    |       |
+| lname    | varchar(10) | YES  |     | NULL    |       |
+| ssn      | int         | NO   | PRI | NULL    |       |
+| bdate    | date        | YES  |     | NULL    |       |
+| address  | varchar(25) | YES  |     | NULL    |       |
+| sex      | char(1)     | YES  |     | NULL    |       |
+| salary   | int         | YES  |     | NULL    |       |
+| superssn | int         | YES  | MUL | NULL    |       |
+| dno      | int         | YES  | MUL | NULL    |       |
+| JOB      | varchar(12) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+11 rows in set (0.00 sec)
+
+mysql> desc certified;
++-------+------+------+-----+---------+-------+
+| Field | Type | Null | Key | Default | Extra |
++-------+------+------+-----+---------+-------+
+| eid   | int  | NO   | PRI | NULL    |       |
+| aid   | int  | NO   | PRI | NULL    |       |
++-------+------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> select distinct a.name from aircraft a, certified c, employees e, where a.aid=c.aid and c.eid=e.eid and exists (select * from employees e1 where e1.eid=e.eid and e1.salary>80000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where a.aid=c.aid and c.eid=e.eid and exists (select * from employees e1 where e' at line 1
+mysql> SELECT DISTINCT a.aname  FROM aircraft a,certified c,employees e  WHERE a.aid=c.aid  AND c.eid=e.eid  AND  EXISTS  (SELECT * FROM employees e1  WHERE e1.eid=e.eid  AND e1.salary>80000);
++------------+
+| aname      |
++------------+
+| AIRBUS     |
+| JET01      |
+| AIRBUS380  |
+| BOEING     |
+| AIRCRAFT02 |
++------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT c.eid, MAX(cruisingrange) from certified  c, aircraft a where c.aid = a.aid group by c.eid having count(*)>3;
++-----+--------------------+
+| eid | MAX(cruisingrange) |
++-----+--------------------+
+|   1 |               8000 |
++-----+--------------------+
+1 row in set (0.00 sec)
+
+mysql> select ename from employees  where salary < ( select min(price)   from flight   where frm = 'bangalore'   and too ='franfurt' );
++-------+
+| ename |
++-------+
+| Ajay  |
+| Ajith |
+| Arnab |
+| Harry |
+| Ron   |
+| Josh  |
++-------+
+6 rows in set (0.00 sec)
+
+mysql> Select a.aid, a.aname, AVG(e.salary) from aircraft a, certified c, employees e where a.aid = c.aid AND c.eid =e.eid AND a.cruisingrange > 1000 GROUP BY a.aid, a.aname;
++-----+-----------+---------------+
+| aid | aname     | AVG(e.salary) |
++-----+-----------+---------------+
+| 302 | BOEING    |    73333.3333 |
+| 306 | JET01     |    57500.0000 |
+| 378 | AIRBUS380 |    53333.3333 |
++-----+-----------+---------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT distinct e. ename from employees e, aircraft a, certified c where e.eid = c.eid AND
+    ->  c.aid = a.aid AND a. aname = 'Boeing';
++-------+
+| ename |
++-------+
+| Ajay  |
+| Ron   |
+| Ram   |
++-------+
+3 rows in set (0.00 sec)
+
+mysql> Select aid from aircraft where cruisingrange > (Select min(distance) from flight where frm= 'Bangalore' and   too= 'Delhi');
++-----+
+| aid |
++-----+
+| 378 |
++-----+
+1 row in set (0.00 sec)
+
+mysql> #end of experiment 6
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> #####################################################################################################################################################################################################################################
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> #experiment 7
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> ###############################EXPERIMENT 7###################################################################
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
